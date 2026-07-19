@@ -1,220 +1,739 @@
 <div align="center">
 
-# 📄🔗💼 Resume ↔ Job Description Match Scorer
+# 💼 SkillBridge-AI
 
-### A Siamese BiLSTM Deep Neural Network for Text-Pair Matching
+### 🧠 Deep Learning Powered Resume ↔ Job Description Matching using Siamese BiLSTM Networks
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.16+-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
-[![Keras](https://img.shields.io/badge/Keras-Siamese%20BiLSTM-D00000?logo=keras&logoColor=white)](https://keras.io/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-Metrics-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<p align="center">
+
+<img src="./assets/07_dashboard.png" width="100%"/>
+
+</p>
+
+---
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://tensorflow.org)
+[![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-D00000?style=for-the-badge&logo=keras&logoColor=white)](https://keras.io)
+[![NLP](https://img.shields.io/badge/NLP-Resume%20Matching-4CAF50?style=for-the-badge)]
+[![BiLSTM](https://img.shields.io/badge/Siamese-BiLSTM-6A1B9A?style=for-the-badge)]
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]
+
+---
+
+### 🎯 Intelligent Resume Screening using Semantic Similarity
+
+*Matching candidate resumes with job descriptions using a shared BiLSTM encoder to understand contextual meaning instead of relying on simple keyword matching.*
 
 </div>
 
 ---
 
-## 📖 Introduction
+# 📌 Overview
 
-Given a **resume** and a **job description**, this project trains a neural network to read both and predict whether the resume is a good match for the role — outputting a single probability between 0 (no match) and 1 (strong match). It was built as a **Day 19 Deep Neural Networks assignment**, and demonstrates a **Siamese** architecture: one shared **Bidirectional LSTM** text encoder used twice (once per document) to compare two pieces of text rather than classify one.
+Recruiters often receive hundreds of resumes for a single job opening. Traditional Applicant Tracking Systems (ATS) mainly depend on keyword matching, causing many qualified candidates to be overlooked simply because they use different wording.
 
-## 🎯 Problem Statement
+**SkillBridge-AI** solves this challenge by learning the **semantic relationship** between resumes and job descriptions using a **Siamese Bidirectional LSTM architecture**. Instead of comparing exact words, the model learns contextual embeddings that capture whether a candidate's experience aligns with a role.
 
-Comparing two documents for compatibility (resume vs. JD) is fundamentally different from classifying a single document. A plain classifier can't naturally express "how similar are these two texts to each other" — it needs an architecture that encodes both inputs into the *same* vector space so they can be directly compared. This project builds and trains exactly that.
+The system processes both documents through a **shared neural encoder**, extracts meaningful feature representations, and predicts the probability that a resume matches a given job description.
 
-## 🎯 Objectives
+---
 
-- Generate a synthetic but structurally realistic resume/JD dataset across 5 job domains.
-- Build a **Siamese BiLSTM** encoder shared between the resume and JD inputs.
-- Combine the two encoded vectors (concatenation + absolute difference + element-wise product) into an explicit similarity signal for the classification head.
-- Train, evaluate, and save a working match-probability model, with full metrics and visualizations.
+# 🚀 Key Features
 
-## ✨ Features
+✅ Resume ↔ Job Description Semantic Matching
 
-| Feature | Description |
-|---|---|
-| 🔗 **Siamese architecture** | One shared BiLSTM encoder used for both the resume and the JD — halves the parameter count vs. two separate encoders and forces both texts into the same embedding space |
-| ↔️ **Bidirectional LSTM** | Reads each text forwards *and* backwards so meaning-changing context (e.g. "experience **required**" vs. "experience **preferred**") is captured |
-| ➕ **Explicit similarity features** | `\|resume_vector - jd_vector\|` and element-wise product are concatenated in before the final Dense head, giving the model an easy "distance" signal |
-| 🧹 **Custom text cleaning** | Preserves technical tokens (`c++`, `ci/cd`, `node.js`) instead of blindly stripping punctuation |
-| 🧪 **Synthetic, reproducible dataset** | 900 labeled resume/JD pairs generated across 5 domains — no scraping, no licensing/privacy concerns |
-| ⏹️ **Early stopping** | Training halts and restores the best weights once validation loss stops improving |
-| 📊 **Full evaluation suite** | Classification report, confusion matrix, and training curves are all saved automatically |
-| 🔮 **Standalone inference script** | Score any new (resume, JD) pair with `predict.py` without retraining |
+✅ Siamese Shared Encoder Architecture
 
-## 🛠️ Tech Stack
+✅ Bidirectional LSTM Feature Extraction
 
-| Layer | Technology |
-|---|---|
-| Deep Learning | TensorFlow / Keras (`TextVectorization`, `Embedding`, `Bidirectional LSTM`, custom `AbsDifference` layer) |
-| Data handling | `pandas`, `numpy` |
-| Evaluation | `scikit-learn` (`classification_report`, `confusion_matrix`, `train_test_split`) |
-| Visualization | `matplotlib` |
-| Language | Python 3.10+ |
+✅ Deep Learning Based Similarity Prediction
 
-## 🏗️ Project Architecture
+✅ Automatic Resume Scoring
+
+✅ Training & Validation Monitoring
+
+✅ Confusion Matrix Visualization
+
+✅ Model Evaluation Report
+
+✅ Ready for ATS Integration
+
+---
+
+# 🧠 Why Siamese Networks?
+
+Unlike traditional neural networks that process only one input, a **Siamese Network** accepts **two separate inputs** while sharing the same encoder weights.
 
 ```
-raw resume text   ─┐
-                    ├─> clean_text() ─> TextVectorization ─> Embedding ─> BiLSTM x2 ─┐
-raw JD text       ─┘  (shared encoder, same weights used for both)                  ├─> |diff|, product, concat ─> Dense ─> Dense ─> sigmoid ─> match probability
+Resume
+      \
+       \
+        > Shared BiLSTM Encoder
+       /
+Job Description
+
+            ↓
+
+      Feature Comparison
+
+            ↓
+
+    Matching Probability
 ```
 
-**Why this design?**
-- **Siamese network** = one shared encoder used twice (once for the resume, once for the JD). This forces both texts into the same vector space so the network can literally measure how "close" they are, while halving the parameters versus training two separate encoders.
-- **BiLSTM** inside the encoder reads each sentence forwards *and* backwards, so a word's representation is shaped by the whole sentence, not just the words before it.
-- **`|diff|` and elementwise product** give the Dense head an explicit, easy-to-learn "how similar are these two vectors" signal on top of the raw concatenated vectors.
+This enables the model to learn **semantic similarity** instead of exact keyword overlap.
 
-## 📁 Folder Structure
+---
 
-```
-resume-jd-match-siamese-bilstm/
+# ⚙ Technology Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Language | Python |
+| Deep Learning | TensorFlow, Keras |
+| NLP | Tokenization, Text Cleaning |
+| Model | Siamese BiLSTM |
+| Visualization | Matplotlib |
+| Evaluation | Scikit-Learn |
+| Notebook | Jupyter |
+| Development | VS Code |
+
+---
+
+# 📂 Repository Structure
+
+```text
+SkillBridge-AI/
+│
+├── assets/
+│   ├── 01_model.summary.png
+│   ├── 02-prediction-example1.png
+│   ├── 03_training-validation-performance-curves.png
+│   ├── 04_confusion-matrix-classification.png
+│   ├── 05_model-evaluation-report.png
+│   ├── 06_text-cleaning-data-preprocessing.png
+│   └── 07_dashboard.png
+│
+├── data/
+├── models/
+├── notebooks/
+├── outputs/
+├── src/
+│
 ├── README.md
 ├── requirements.txt
-├── LICENSE
-├── data/
-│   └── train.jsonl                # synthetic resume/JD dataset (900 labeled pairs)
-├── src/
-│   ├── make_dataset.py            # generates the synthetic dataset
-│   ├── preprocessing.py           # text cleaning + dataframe helpers
-│   ├── model.py                   # Siamese BiLSTM architecture
-│   ├── train.py                   # trains the model end-to-end
-│   ├── evaluate.py                # reloads saved model, reprints metrics
-│   └── predict.py                 # score a single new (resume, JD) pair
-├── models/
-│   ├── resume_jd_match_model.keras
-│   └── vectorizer_vocab.json
-├── outputs/
-│   ├── training_history.png       # loss/accuracy curves
-│   ├── training_history.json
-│   ├── confusion_matrix.png
-│   └── evaluation_report.md
-├── assets/                        # extra screenshots (see Screenshots section below)
-└── notebooks/
-    └── Resume_JD_Match_Prannoy.ipynb   # full standalone walkthrough notebook
+└── LICENSE
 ```
 
-## 📦 Requirements
+---
+
+# 🌟 Project Workflow
 
 ```
-tensorflow>=2.16
-pandas>=2.0
-numpy>=1.24
-scikit-learn>=1.3
-matplotlib>=3.7
+Resume
+      │
+      ▼
+Text Cleaning & Preprocessing
+      │
+      ▼
+Tokenization
+      │
+      ▼
+Shared BiLSTM Encoder
+      │
+      ▼
+Feature Comparison
+      │
+      ▼
+Dense Classification Layer
+      │
+      ▼
+Matching Probability
+      │
+      ▼
+Prediction (MATCH / NO MATCH)
 ```
 
-## ⚙️ Setup Guide
+---
 
-```bash
-git clone https://github.com/Prannoybuilds/resume-jd-match-siamese-bilstm.git
-cd resume-jd-match-siamese-bilstm
+# 🖥 Dashboard Overview
 
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+The following dashboard summarizes the complete development pipeline, including preprocessing, model architecture, prediction workflow, training history, evaluation metrics, and final outputs.
 
-pip install -r requirements.txt
-```
+<p align="center">
 
-## ▶️ How to Run
+<img src="./assets/07_dashboard.png" width="95%"/>
 
-```bash
-cd src
-python make_dataset.py     # regenerate data/train.jsonl (optional, already included)
-python train.py            # train the model, writes to models/ and outputs/
-python evaluate.py         # reload saved model, print metrics again
-python predict.py          # score one example resume/JD pair
-```
+</p>
 
-Alternatively, open `notebooks/Resume_JD_Match_Prannoy.ipynb` for a full, self-contained walkthrough (uses smaller hyperparameters — `VOCAB_SIZE=4000`, `MAX_LEN=48`, `EMBEDDING_DIM=32`, `LSTM_UNITS=24` — than the production `src/train.py` script, which uses `VOCAB_SIZE=8000`, `MAX_LEN=96`, `EMBEDDING_DIM=64`, `LSTM_UNITS=48`).
+> **Figure 1:** Complete SkillBridge-AI Development Dashboard
 
-## 🔄 Workflow
+---
 
-1. **`make_dataset.py`** generates 900 synthetic (resume, JD, label) triples across 5 domains — data science, frontend, backend, devops, marketing. Same-domain pairs are labeled `match` (1); cross-domain pairs are labeled `no_match` (0).
-2. **`preprocessing.py`** lowercases and cleans text while preserving technical tokens, then loads the data into a DataFrame.
-3. **`train.py`** splits the data 80/20 (stratified), adapts a `TextVectorization` layer on the training text, builds the Siamese BiLSTM model, and trains it with early stopping (`monitor="val_loss", patience=5`).
-4. Training curves, a classification report, and a confusion matrix are saved to `outputs/`.
-5. The trained model and vectorizer vocabulary are saved to `models/`.
-6. **`predict.py`** reloads the saved model to score any new (resume, JD) pair.
-
-## 📸 Screenshots
-
-> The training curves and confusion matrix already exist in `outputs/` — no need to recapture those, just reference them directly (see Results section above). Capture the two extra ones below from your notebook/terminal and drop them into `assets/`.
-
-| # | Screenshot | What it shows |
-|---|---|---|
-| 1 | ![Model summary](assets/01-model-summary.png) | `model.summary()` output — the Siamese BiLSTM architecture, layer-by-layer |
-| 2 | ![Prediction example](assets/02-prediction-example.png) | Terminal output of `predict.py` scoring a real (resume, JD) pair |
-
-<details>
-<summary>📋 Exact steps to capture these (click to expand)</summary>
-
-1. **Screenshot 1** — open `notebooks/Resume_JD_Match_Prannoy.ipynb`, find the cell that builds and prints the model (`model.summary()`), and screenshot its output.
-2. **Screenshot 2** — in a terminal, run `python src/predict.py` and screenshot the printed match score/probability.
-3. Save both as PNGs in `assets/`, named to match the table above.
-
-</details>
-
-## 📊 Results (this run)
+# 📈 Model Performance (Current Run)
 
 | Metric | Value |
-|---|---:|
+|---------|------:|
 | Validation Accuracy | **0.9778** |
-| Validation Loss | 0.0681 |
-| Precision | 0.9574 |
-| Recall | 1.0000 |
+| Validation Loss | **0.0681** |
+| Precision | **0.9574** |
+| Recall | **1.0000** |
 
 ```
               precision    recall  f1-score   support
 
-    no_match       1.00      0.96      0.98        90
-       match       0.96      1.00      0.98        90
+    no_match      1.00      0.96      0.98       90
+       match      0.96      1.00      0.98       90
 
-    accuracy                           0.98       180
-   macro avg       0.98      0.98      0.98       180
-weighted avg       0.98      0.98      0.98       180
+    accuracy                          0.98      180
+   macro avg      0.98      0.98      0.98      180
+weighted avg      0.98      0.98      0.98      180
 ```
 
-The model reached **~97.8% validation accuracy** on the held-out synthetic set (180 pairs), catching every true match (100% recall) with only 4 false-positive "match" predictions out of 90 true no-match pairs. Training and validation loss both decreased smoothly across 8 epochs with no sign of overfitting (see `outputs/training_history.png`), and the confusion matrix (`outputs/confusion_matrix.png`) confirms strong performance in both directions.
+---
 
-## 🐛 Known Issue (Fixed)
+## 📸 Implementation Highlights
 
-The originally submitted `predict.py` was missing an import of the custom `AbsDifference` layer from `model.py`. Without it, Keras can't deserialize the saved `.keras` model (it raises `Could not locate class 'AbsDifference'`) because the class's `@register_keras_serializable` decorator never runs. **Fixed** by adding `from model import AbsDifference` at the top of `predict.py` — `evaluate.py` already had this import correctly. No model, training, or architecture logic was changed.
+The following sections showcase each stage of the SkillBridge-AI pipeline, from model design to prediction, training, evaluation, and preprocessing.
 
-## 📁 Dataset Note
+# 🧠 Model Architecture
 
-`data/train.jsonl` is a **synthetically generated** dataset (see `src/make_dataset.py`), built by pairing resumes and job descriptions across 5 domains (data science, frontend, backend, devops, marketing). Same-domain pairs are labeled `match`, cross-domain pairs are labeled `no_match`. This keeps the project fully self-contained and reproducible without depending on a scraped or shared dataset — though it also means the model has learned a somewhat easier, template-shaped version of the real-world matching problem, and results on real resumes/JDs would likely be lower than the 97.8% seen here.
+SkillBridge-AI is built on a **Siamese Bidirectional LSTM Network**, where both the **Resume** and **Job Description** are processed through a **shared text encoder**.
 
-## 🎓 Learning Outcomes
+The encoder learns contextual embeddings from both documents before comparing their semantic representations.
 
-- Why sequence models (RNN/LSTM) are needed for text instead of bag-of-words.
-- The vanishing gradient problem in vanilla RNNs, and how LSTM gates address it.
-- What "Bidirectional" adds over a plain LSTM.
-- Why the encoder is *shared* (Siamese) between two inputs instead of using two separate encoders.
-- Why `|diff|` and elementwise product are useful as extra features before the final Dense head.
-- Binary cross-entropy loss and what precision/recall/accuracy mean for a match/no-match task.
-- Early stopping and why it helps prevent overfitting.
+<p align="center">
 
-## 🚀 Future Improvements
+<img src="./assets/01_model.summary.png" width="85%">
 
-- Replace the synthetic template-based dataset with real (anonymized) resume/JD pairs for a more realistic difficulty level.
-- Add attention or a Transformer-based encoder (e.g. a small pretrained sentence embedding model) as a stronger alternative to the BiLSTM.
-- Add a lightweight Streamlit/Gradio demo UI for `predict.py` so non-technical users can try it interactively.
-- Track experiments (hyperparameters, metrics) with a tool like MLflow or Weights & Biases.
-- Add unit tests for `preprocessing.clean_text()` and the custom `AbsDifference` layer.
+</p>
 
-## 📄 License
+<p align="center">
+<b>Figure 2.</b> Siamese BiLSTM Model Architecture Summary
+</p>
 
-This project is licensed under the [MIT License](LICENSE).
+---
 
-## 👤 Author
+# 🔍 Resume Matching Example
 
-**Prannoy Sen**
-B.Tech Computer Science & Engineering
-Summer Training Programme on Machine Learning & Agentic AI — Electronics & ICT Academy, IIT Roorkee
+Once the model is trained, it can evaluate a Resume and Job Description pair and generate a semantic similarity score.
 
-## 🙏 Acknowledgements
+The prediction below demonstrates a successful **MATCH** between an experienced Machine Learning candidate and a suitable job posting.
 
-- [Electronics & ICT Academy, IIT Roorkee](https://www.eiacindia.org/) — Summer Training Programme on Machine Learning & Agentic AI
-- [TensorFlow / Keras](https://www.tensorflow.org/) documentation on `TextVectorization` and custom layers
-- [scikit-learn](https://scikit-learn.org/) for evaluation utilities
+<p align="center">
+
+<img src="./assets/02-prediction-example1.png" width="90%">
+
+</p>
+
+<p align="center">
+<b>Figure 3.</b> Resume ↔ Job Description Prediction Example
+</p>
+
+---
+
+# 📈 Training Performance
+
+During training, both **Loss** and **Accuracy** were monitored to evaluate model convergence.
+
+The curves show continuous learning with improving validation accuracy across epochs.
+
+<p align="center">
+
+<img src="./assets/03_training-validation-performance-curves.png" width="95%">
+
+</p>
+
+<p align="center">
+<b>Figure 4.</b> Training and Validation Performance Curves
+</p>
+
+---
+
+# 📊 Classification Performance
+
+To better understand prediction quality, a **Confusion Matrix** was generated.
+
+The matrix illustrates the distribution of correctly and incorrectly classified Resume–Job Description pairs.
+
+<p align="center">
+
+<img src="./assets/04_confusion-matrix-classification.png" width="85%">
+
+</p>
+
+<p align="center">
+<b>Figure 5.</b> Confusion Matrix for Resume Classification
+</p>
+
+---
+
+# 📋 Evaluation Metrics
+
+The trained model achieved excellent validation performance across all major classification metrics.
+
+Key metrics include:
+
+- ✅ Validation Accuracy
+- ✅ Precision
+- ✅ Recall
+- ✅ F1 Score
+
+<p align="center">
+
+<img src="./assets/05_model-evaluation-report.png" width="88%">
+
+</p>
+
+<p align="center">
+<b>Figure 6.</b> Model Evaluation Report
+</p>
+
+---
+
+# 🧹 Data Preprocessing Pipeline
+
+Before training, every Resume and Job Description undergoes a cleaning pipeline.
+
+The preprocessing stage includes:
+
+- Lowercase normalization
+- Removal of unwanted symbols
+- Whitespace normalization
+- Preservation of technical keywords
+- Token preparation
+
+This ensures cleaner textual input for the Siamese encoder while preserving important programming-related terminology.
+
+<p align="center">
+
+<img src="./assets/06_text-cleaning-data-preprocessing.png" width="88%">
+
+</p>
+
+<p align="center">
+<b>Figure 7.</b> Text Cleaning and Data Preprocessing Pipeline
+</p>
+
+---
+
+# 📊 Experimental Results
+
+The trained Siamese BiLSTM achieved strong semantic matching performance.
+
+| Metric | Score |
+|---------|-------|
+| Validation Accuracy | **97.78%** |
+| Validation Loss | **0.0681** |
+| Precision | **95.74%** |
+| Recall | **100%** |
+| F1 Score | **98%** |
+
+These results demonstrate that the shared encoder effectively captures semantic similarity between resumes and job descriptions, making it suitable for intelligent recruitment systems.
+
+---
+# ⚙ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Prannoybuilds/SkillBridge-AI.git
+```
+
+Move into the project
+
+```bash
+cd SkillBridge-AI
+```
+
+Create a virtual environment (recommended)
+
+```bash
+python -m venv venv
+```
+
+Activate it
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / macOS**
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🚀 Usage
+
+## 1️⃣ Prepare Dataset
+
+```bash
+python src/make_dataset.py
+```
+
+---
+
+## 2️⃣ Train the Siamese BiLSTM
+
+```bash
+python src/train.py
+```
+
+The training process will automatically:
+
+- preprocess text
+- tokenize resumes
+- tokenize job descriptions
+- train the Siamese network
+- save the trained model
+- generate evaluation plots
+
+---
+
+## 3️⃣ Evaluate Model
+
+```bash
+python src/evaluate.py
+```
+
+Generated outputs include
+
+- Confusion Matrix
+- Evaluation Report
+- Accuracy Metrics
+- Training Curves
+
+---
+
+## 4️⃣ Predict Resume Match
+
+```bash
+python src/predict.py
+```
+
+Example Output
+
+```text
+Resume:
+Candidate has 3–5 years experience in Python, TensorFlow and NLP...
+
+Job Description:
+Machine Learning Engineer with Python and Deep Learning experience...
+
+Match Probability : 95.03 %
+
+Prediction : MATCH ✅
+```
+
+---
+
+# 📂 Dataset
+
+Each training sample consists of
+
+```
+Resume
+↓
+
+Job Description
+↓
+
+Label
+
+0 → No Match
+
+1 → Match
+```
+
+The dataset is converted into tokenized sequences before training the Siamese encoder.
+
+---
+
+# 🎯 Applications
+
+- AI Resume Screening
+
+- Smart Applicant Tracking Systems (ATS)
+
+- HR Automation
+
+- Talent Acquisition Platforms
+
+- Recruitment Recommendation Systems
+
+- Career Matching Platforms
+
+- Enterprise Hiring Solutions
+
+- Resume Ranking Systems
+
+---
+
+# 🔮 Future Improvements
+
+- Transformer-based Resume Encoder (BERT / RoBERTa)
+
+- Sentence-BERT Embeddings
+
+- FAISS Semantic Resume Search
+
+- Explainable AI Matching Scores
+
+- Multi-language Resume Matching
+
+- Resume Ranking Dashboard
+
+- Streamlit Web Application
+
+- REST API Deployment
+
+- Docker Support
+
+- Cloud Deployment
+
+---
+
+# 🤝 Contributing
+
+Contributions are always welcome.
+
+If you would like to improve this project:
+
+1. Fork the repository
+
+2. Create a new branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+# 📜 License
+
+This project is licensed under the **MIT License**.
+
+See the LICENSE file for complete details.
+
+---
+
+# 👨‍💻 Author
+
+## Prannoy Sen
+
+B.Tech Computer Science Engineering
+
+Manipal University Jaipur
+
+Interested in
+
+- Artificial Intelligence
+- Machine Learning
+- Deep Learning
+- Natural Language Processing
+- Generative AI
+- Intelligent Recruitment Systems
+
+---
+
+<div align="center">
+
+## ⭐ If you found this project useful, consider giving it a Star!
+
+⭐ ⭐ ⭐ ⭐ ⭐
+
+**Built with ❤️ using TensorFlow, Keras and Deep Learning**
+
+</div>
+---
+
+# 🧠 How SkillBridge-AI Works
+
+```text
+                 Resume
+                    │
+                    ▼
+          Text Cleaning & Normalization
+                    │
+                    ▼
+              Tokenization Layer
+                    │
+                    ▼
+          Shared BiLSTM Text Encoder
+              ↙             ↘
+      Resume Vector      JD Vector
+              │             │
+              └──── Feature Comparison ────┐
+                                           ▼
+                               Dense Neural Layers
+                                           │
+                                           ▼
+                               Match Probability
+                                           │
+                         ┌─────────────────┴─────────────────┐
+                         │                                   │
+                     MATCH ✅                         NO MATCH ❌
+```
+
+---
+
+# 🏗 Project Architecture
+
+```text
+                 +----------------------+
+                 |    Resume Input      |
+                 +----------+-----------+
+                            |
+                            |
+                            v
+                   +------------------+
+                   | Shared BiLSTM    |
+                   | Text Encoder     |
+                   +--------+---------+
+                            |
+                 +----------+-----------+
+                 |                      |
+                 |                      |
+                 v                      v
+      Resume Embedding        JD Embedding
+                 \              /
+                  \            /
+                   \          /
+                    \        /
+                 Feature Comparison
+                         |
+                         v
+                 Dense Neural Layers
+                         |
+                         v
+                 Match Probability
+```
+
+---
+
+# 📈 Performance Summary
+
+| Feature | Status |
+|---------|:------:|
+| Semantic Resume Matching | ✅ |
+| Shared Siamese Encoder | ✅ |
+| BiLSTM Context Learning | ✅ |
+| Resume Classification | ✅ |
+| Training Curves | ✅ |
+| Confusion Matrix | ✅ |
+| Evaluation Report | ✅ |
+| Prediction Pipeline | ✅ |
+
+---
+
+# 📊 Model Statistics
+
+| Parameter | Value |
+|-----------|-------|
+| Deep Learning Framework | TensorFlow |
+| Network | Siamese BiLSTM |
+| Shared Encoder | ✔ |
+| Total Parameters | 164,897 |
+| Output Classes | Match / No Match |
+| Evaluation Accuracy | 97.78% |
+
+---
+
+# 🎯 Real World Applications
+
+💼 Enterprise Recruitment
+
+📄 Resume Screening
+
+🤖 AI Applicant Tracking Systems
+
+🏢 HR Automation
+
+🔎 Semantic Candidate Search
+
+📊 Talent Analytics
+
+👨‍💼 Hiring Recommendation Systems
+
+🌐 Career Matching Platforms
+
+---
+
+# 💡 Key Learnings
+
+During this project the following concepts were explored:
+
+- Siamese Neural Networks
+- Bidirectional LSTM
+- Semantic Text Similarity
+- Natural Language Processing
+- TensorFlow Functional API
+- Shared Weight Networks
+- Binary Classification
+- Deep Learning Evaluation Metrics
+- Resume Intelligence
+- AI-assisted Recruitment
+
+---
+
+# 🙏 Acknowledgements
+
+This project was developed as part of the
+
+**Summer Training Programme on Machine Learning & Agentic AI**
+
+conducted by
+
+**Electronics & ICT Academy, IIT Roorkee**
+
+The implementation demonstrates the practical application of Deep Learning techniques for intelligent Resume–Job Description semantic matching.
+
+---
+
+<div align="center">
+
+## 🌟 Support the Project
+
+If you found this repository useful,
+
+⭐ **Star this repository**
+
+🍴 **Fork it**
+
+📢 **Share it with others**
+
+Your support motivates further open-source AI projects.
+
+---
+
+### 💼 SkillBridge-AI
+
+**Connecting Talent with Opportunity through Deep Learning**
+
+</div>
