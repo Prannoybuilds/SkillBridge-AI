@@ -203,23 +203,7 @@ The encoder learns contextual embeddings from both documents before comparing th
 
 ---
 
-# 🔍 Resume Matching Example
 
-Once the model is trained, it can evaluate a Resume and Job Description pair and generate a semantic similarity score.
-
-The prediction below demonstrates a successful **MATCH** between an experienced Machine Learning candidate and a suitable job posting.
-
-<p align="center">
-
-<img src="./assets/02-prediction-example1.png" width="90%">
-
-</p>
-
-<p align="center">
-<b>Figure 3.</b> Resume ↔ Job Description Prediction Example
-</p>
-
----
 
 # 📈 Training Performance
 
@@ -302,6 +286,24 @@ This ensures cleaner textual input for the Siamese encoder while preserving impo
 
 <p align="center">
 <b>Figure 7.</b> Text Cleaning and Data Preprocessing Pipeline
+</p>
+
+---
+
+# 🔍 Resume Matching Example
+
+Once the model is trained, it can evaluate a Resume and Job Description pair and generate a semantic similarity score.
+
+The prediction below demonstrates a successful **MATCH** between an experienced Machine Learning candidate and a suitable job posting.
+
+<p align="center">
+
+<img src="./assets/02-prediction-example1.png" width="90%">
+
+</p>
+
+<p align="center">
+<b>Figure 3.</b> Resume ↔ Job Description Prediction Example
 </p>
 
 ---
