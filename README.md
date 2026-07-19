@@ -157,19 +157,7 @@ Prediction (MATCH / NO MATCH)
 
 ---
 
-# 🖥 Dashboard Overview
-
-The following dashboard summarizes the complete development pipeline, including preprocessing, model architecture, prediction workflow, training history, evaluation metrics, and final outputs.
-
-<p align="center">
-
-<img src="./assets/07_dashboard.png" width="95%"/>
-
-</p>
-
-> **Figure 1:** Complete SkillBridge-AI Development Dashboard
-
----
+ 
 
 # 📈 Model Performance (Current Run)
 
@@ -505,73 +493,7 @@ The dataset is converted into tokenized sequences before training the Siamese en
 
 ---
 
-# 🤝 Contributing
 
-Contributions are always welcome.
-
-If you would like to improve this project:
-
-1. Fork the repository
-
-2. Create a new branch
-
-```bash
-git checkout -b feature-name
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Added new feature"
-```
-
-4. Push
-
-```bash
-git push origin feature-name
-```
-
-5. Open a Pull Request
-
----
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
-See the LICENSE file for complete details.
-
----
-
-# 👨‍💻 Author
-
-## Prannoy Sen
-
-B.Tech Computer Science Engineering
-
-Manipal University Jaipur
-
-Interested in
-
-- Artificial Intelligence
-- Machine Learning
-- Deep Learning
-- Natural Language Processing
-- Generative AI
-- Intelligent Recruitment Systems
-
----
-
-<div align="center">
-
-## ⭐ If you found this project useful, consider giving it a Star!
-
-⭐ ⭐ ⭐ ⭐ ⭐
-
-**Built with ❤️ using TensorFlow, Keras and Deep Learning**
-
-</div>
----
 
 # 🧠 How SkillBridge-AI Works
 
@@ -701,7 +623,55 @@ During this project the following concepts were explored:
 - AI-assisted Recruitment
 
 ---
+# 🤝 Contributing
 
+Contributions are always welcome.
+
+If you would like to improve this project:
+
+1. Fork the repository
+
+2. Create a new branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+# 📜 License
+
+This project is licensed under the **MIT License**.
+
+See the LICENSE file for complete details.
+
+---
+
+# 👨‍💻 Author
+
+## Prannoy Sen
+
+B.Tech Computer Science Engineering
+
+Manipal University Jaipur
+
+ 
+
+ 
 # 🙏 Acknowledgements
 
 This project was developed as part of the
