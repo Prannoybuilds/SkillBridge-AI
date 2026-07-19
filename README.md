@@ -9,17 +9,21 @@
 <img src="./assets/07_dashboard.png" width="100%"/>
 
 </p>
+<p align="center">
 
----
+<img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" height="28"/>
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)](https://tensorflow.org)
-[![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-D00000?style=for-the-badge&logo=keras&logoColor=white)](https://keras.io)
-[![NLP](https://img.shields.io/badge/NLP-Resume%20Matching-4CAF50?style=for-the-badge)]
-[![BiLSTM](https://img.shields.io/badge/Siamese-BiLSTM-6A1B9A?style=for-the-badge)]
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)]
+<img src="https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" height="28"/>
 
----
+<img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" height="28"/>
+
+<img src="https://img.shields.io/badge/NLP-Resume%20Matching-4CAF50?style=for-the-badge" height="28"/>
+
+<img src="https://img.shields.io/badge/BiLSTM-Siamese-6A1B9A?style=for-the-badge" height="28"/>
+
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" height="28"/>
+
+</p>
 
 ### 🎯 Intelligent Resume Screening using Semantic Similarity
 
